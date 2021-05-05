@@ -1,31 +1,20 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
-export const TodoItem = ({ value, number, deleteItem, id }) => {
+export const TodoItem = ({ value, number, OpenTodo, id }) => {
 
-
-    const [focus, setFocus] = React.useState(false);
-
-    const onSelected = () => {
-        setFocus(true)
-    }
-    const offSelected = () => {
-        setFocus(false)
-    }
-    const onTrash = () => {
-        deleteItem(id)
+    let onOpen = () => {
+        OpenTodo(id)
     }
 
-    return (
-        <TouchableOpacity onLongPress={focus ? offSelected : onSelected} onPress={focus ? offSelected : null}>
-            <View style={focus ? styles.active : styles.todo} >
+    return (<View>
+        <TouchableOpacity onPress={onOpen}>
+            <View style={styles.todo}>
                 <Text>{number + '. '}</Text>
                 <Text style={styles.text}>{value}</Text>
-                {focus && <Text style={styles.trash} onPress={offSelected}>{' ❎ '}</Text> }
-                {focus && <Text style={styles.trash} onPress={onTrash}>{' 🗑️ '}</Text> }
             </View>
         </TouchableOpacity>
-    )
+    </View>)
 }
 
 const styles = StyleSheet.create({
@@ -39,20 +28,9 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     text: {
-        flex:1,
+        flex: 1,
+        fontFamily: 'pangolin',
+        lineHeight: 20
     },
-    active: {
-        flexDirection: 'row',
-        backgroundColor: 'yellow',
-        borderColor: 'black',
-        borderWidth: 2,
-        borderRadius: 5,
-        padding: 5,
-        marginTop: 10,
-        backgroundColor: 'red',
-    },
-    trash: {
-        fontSize: 22,
 
-    }
 })

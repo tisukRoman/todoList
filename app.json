@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "messanger",
-    "slug": "messanger",
+    "name": "todo list",
+    "slug": "todo-list",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/todo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/todo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "myfirstProg.apk"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Almost ready mini-project for my portfolio ",
+    "githubUrl": "https://github.com/tisukRoman/todoList"
   }
 }

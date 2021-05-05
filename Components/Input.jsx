@@ -1,5 +1,7 @@
 import React from 'react'
-import { TextInput, View, StyleSheet, Button } from 'react-native'
+import { TextInput, KeyboardAvoidingView, StyleSheet} from 'react-native'
+import AppButton from '../UI/AppButton';
+import {Entypo} from '@expo/vector-icons'
 
 export const Input = ({ PressHandler }) => {
 
@@ -11,7 +13,7 @@ export const Input = ({ PressHandler }) => {
     }
 
     return (
-        <View style={styles.input}>
+        <KeyboardAvoidingView style={styles.input}>
 
             <TextInput
                 value={value}
@@ -20,13 +22,11 @@ export const Input = ({ PressHandler }) => {
                 placeholder='название дела...'
             ></TextInput>
 
-            <Button
-                title='добавить'
-                style={styles.button}
-                onPress={onSubmit}
-            />
+            <AppButton onPress={onSubmit} >
+                <Entypo name='add-to-list' size={25}/>
+            </AppButton>
 
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 
@@ -34,7 +34,10 @@ const styles = StyleSheet.create({
     input: {
         flexDirection: 'row',
         padding: 10,
-        marginTop:10
+        paddingBottom: 30,
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: 'white'
     },
     inputField: {
         flex: 1,
@@ -42,5 +45,6 @@ const styles = StyleSheet.create({
         height: 40,
         borderBottomColor: 'black',
         borderBottomWidth: 2,
+        marginHorizontal: 10,
     }
 })

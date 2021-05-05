@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native'
+import {FontAwesome} from '@expo/vector-icons'
 
-export const Title = props => {
+export const Title = () => {
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.text}>Список дел   🖊️</Text>
+            <Text style={styles.text}>Список дел  <FontAwesome name='pencil' size={25}/></Text>
         </View>
     )
 }
@@ -14,7 +15,9 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         lineHeight: 120,
-        fontSize: 20
+        fontSize: 20,
+        fontFamily: 'pangolin',
+        letterSpacing: 2
     },
     wrapper: {
         height: 100,
