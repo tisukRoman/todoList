@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 
-export const TodoItem = ({ value, number, OpenTodo, id }) => {
+export const TodoItem = ({ value, OpenTodo, id }) => {
 
     let onOpen = () => {
         OpenTodo(id)
@@ -10,7 +10,6 @@ export const TodoItem = ({ value, number, OpenTodo, id }) => {
     return (<View>
         <TouchableOpacity onPress={onOpen}>
             <View style={styles.todo}>
-                <Text>{number + '. '}</Text>
                 <Text style={styles.text}>{value}</Text>
             </View>
         </TouchableOpacity>

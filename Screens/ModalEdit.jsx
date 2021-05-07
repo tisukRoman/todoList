@@ -2,16 +2,17 @@ import React from 'react'
 import { Modal, TextInput, View, StyleSheet } from 'react-native'
 import AppButton from '../UI/AppButton'
 import {AntDesign} from '@expo/vector-icons'
+import Error from '../Components/Error'
 
 
-const ModalEdit = ({ visible, setModal, value, SaveTextHandler }) => {
+const ModalEdit = ({ visible, setModal, value, SaveTextHandler, error }) => {
 
     const [currentText, setCurrentText] = React.useState(value);
 
-    const saveHandler = () => {
-        SaveTextHandler(currentText);
+    
+    if(error){
+        <Error error={error} func={SaveTextHandler}/>
     }
-
     return (
         <Modal
             animationType="slide"
@@ -28,7 +29,7 @@ const ModalEdit = ({ visible, setModal, value, SaveTextHandler }) => {
                         </AppButton>
                     </View>
                     <View style={styles.button}>
-                        <AppButton onPress={saveHandler} back_color='green' text_color='white'>
+                        <AppButton onPress={()=>SaveTextHandler(currentText)} back_color='green' text_color='white'>
                         <AntDesign name='save' size={25} />
                         </AppButton>
                     </View>

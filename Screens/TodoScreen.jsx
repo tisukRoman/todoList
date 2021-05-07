@@ -1,22 +1,33 @@
 import React from 'react'
 import { View, Text, StyleSheet, } from 'react-native'
-import {AntDesign} from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import AppButton from '../UI/AppButton'
 import ModalEdit from './ModalEdit'
+import { TodoContext } from '../context/todo/todoContext'
+import { ScreenContext } from '../context/screen/screenContext'
 
-const TodoScreen = ({ setscreenId, deleteItem, todo, SaveChangedText }) => {
+const TodoScreen = () => {
 
-    const [modal, setModal] = React.useState(false)
+    const { updateTodo, removeTodo, todos, error } = React.useContext(TodoContext);
+    const { changeScreen, screenId } = React.useContext(ScreenContext);
+    const [modal, setModal] = React.useState(false);
 
-    const SaveTextHandler = (value) => {
-        SaveChangedText(todo.id, value);
+    const todo = todos.find(t => t.id === screenId);
+
+    const SaveTextHandler = async (value) => {
+        await updateTodo(todo.id, value);
         setModal(false);
+    }
+    const DeleteTodo = () => {
+        removeTodo(todo.id);
+        changeScreen(null);
     }
 
 
     return <View style={styles.container}>
 
         <ModalEdit
+            error={error}
             visible={modal}
             setModal={setModal}
             value={todo.value}
@@ -30,21 +41,21 @@ const TodoScreen = ({ setscreenId, deleteItem, todo, SaveChangedText }) => {
 
         <View style={styles.buttons}>
             <View style={styles.button}>
-                <AppButton onPress={() => setscreenId(null)}
+                <AppButton onPress={() => changeScreen(null)}
                     back_color='blue' text_color='white'>
-                    <AntDesign name='back' size={25}/>
+                    <AntDesign name='back' size={25} />
                 </AppButton>
             </View>
             <View style={styles.button}>
                 <AppButton onPress={() => setModal(true)}
                     back_color='green' text_color='white'>
-                    <AntDesign name='edit' size={25}/>
+                    <AntDesign name='edit' size={25} />
                 </AppButton>
             </View>
             <View style={styles.button}>
-                <AppButton onPress={() => deleteItem(todo.id)}
+                <AppButton onPress={DeleteTodo}
                     back_color='red' text_color='white'>
-                     <AntDesign name='delete' size={25}/>
+                    <AntDesign name='delete' size={25} />
                 </AppButton>
             </View>
         </View>

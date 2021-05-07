@@ -1,17 +1,28 @@
 import React from 'react'
-import { TextInput, KeyboardAvoidingView, StyleSheet} from 'react-native'
+import { TextInput, KeyboardAvoidingView, StyleSheet, Alert} from 'react-native'
 import AppButton from '../UI/AppButton';
 import {Entypo} from '@expo/vector-icons'
+import { TodoContext } from '../context/todo/todoContext';
 
-export const Input = ({ PressHandler }) => {
+export const Input = () => {
 
+    const {addTodo, isFetching, error} = React.useContext(TodoContext); 
     const [value, setValue] = React.useState(''); // input text
 
     const onSubmit = () => {
-        PressHandler(value);
+        if(value.trim()===''){
+            Alert.alert('Внимание', 'Текст не может быть пустым');
+            return;
+        }
+        addTodo(value);
         setValue('');
     }
 
+
+    //---------------\ RENDERING
+    if(isFetching||error){
+        return null;
+    }
     return (
         <KeyboardAvoidingView style={styles.input}>
 
